@@ -1,0 +1,179 @@
+<!DOCTYPE html>{% load humanize columns print_tag %}
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <title>{{ data_profile.full_name }} - Thống Kê KPI</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/7.0.0/normalize.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/paper-css/0.3.0/paper.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/skeleton/2.0.4/skeleton.min.css">
+    <style>
+        @page { size: A4 }
+        body {
+            font-family: Helvetica Neue, Helvetica, Arial, sans-serif;
+        }
+        .flex {
+            display: flex;
+        }
+        .logo {
+            {#width: 100px;#}
+            height: 26.4px;
+            display: block;
+            margin-top: -40px;
+        }
+        .flex-primary {
+            flex: 1;
+        }
+        .num-page {
+            position: absolute;
+            bottom: 20px;
+            right: 20px;
+        }
+        .small {
+            font-size: 0.75em;
+        }
+        .kpi-title {
+            font-size: 20px;
+            text-align: center;
+            font-weight: bold;
+        }
+        .kpi-title span {
+            text-transform: uppercase;
+        }
+        .list-tag-info > li {
+            list-style: none;
+            font-size: 12px;
+        }
+    </style>
+</head>
+<body class="A4">
+    {% if not data_tag %}
+        <section class="sheet padding-20mm">
+            <div class="kpi-title">
+                <div>BÁO CÁO THỐNG KÊ KPI THÁNG {{ month_request }}/{{ year_request }}</div>
+                <div>CỦA <span>{{ data_profile.full_name }}</span></div>
+            </div>
+            <div class="small" style="text-align: center">{{ data_department_profile.position }} · {{ data_department_profile.department }}</div>
+            {% if data_profile.user.email %}
+                <div class="small" style="text-align: center">Email: <b>{{ data_profile.user.email }}</b></div>
+            {% endif %}
+            <div style="font-weight: bold; margin-bottom: 8px;">Thống Kê Chung:</div>
+            <table class="u-full-width">
+                <thead>
+                <tr class="small">
+                    <th>KPI Được Giao</th>
+                    <th>Hoàn Thành</th>
+                    <th>Chưa Hoàn Thành</th>
+                    <th>Tổng Số Giờ Làm Việc</th>
+                </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td class="small"><b>{{ data_tag_info.total_tag }} KPI</b></td>
+                        <td class="small"><b>{{ data_tag_info.count_finished }} KPI</b></td>
+                        <td class="small"><b>{{ data_tag_info.count_progress|add:data_tag_info.count_un_finished }} KPI</b></td>
+                        <td class="small"><b>{{ data_tag_info.total_time }} giờ</b></td>
+                    </tr>
+                </tbody>
+            </table>
+            <div style="font-weight: bold; margin-bottom: 8px;">Thông Tin Chi Tiết KPI:</div>
+            <table class="u-full-width">
+                <thead>
+                <tr class="small">
+                    <th>STT</th>
+                    <th>KPI</th>
+                    <th>Mục Tiêu</th>
+                    <th>Đã Đạt</th>
+                    <th>Tiến Độ</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr>
+                    <td class="small"></td>
+                    <td class="small"></td>
+                    <td class="small"></td>
+                    <td class="small"></td>
+                    <td class="small"></td>
+                </tr>
+                </tbody>
+            </table>
+        </section>
+    {% endif %}
+    {% for col in data_tag|chunk_data:6 %}
+        <section class="sheet padding-20mm">
+            <div class="small num-page">Trang {{ forloop.counter }}</div>
+{#            <div class="flex">#}
+{#                <div class="flex-primary"></div>#}
+{#                <img class="logo" src="data:image/svg+xml;base64,PHN2ZyBpZD0iTGF5ZXJfMSIgZGF0YS1uYW1lPSJMYXllciAxIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNTYgMjc1LjQ5Ij48ZGVmcz48c3R5bGU+LmNscy0xe2ZpbGw6IzAwOThkMDt9LmNscy0ye2ZpbGw6I2ZmNTI1Mjt9LmNscy0ze2ZpbGw6I2YzMzt9LmNscy00e2ZvbnQtc2l6ZToxNDBweDtmaWxsOiM1NjU2NTY7Zm9udC1mYW1pbHk6VVRNRHVlcHVudG96ZXJvQm9sZCwgVVRNIER1ZXB1bnRvemVybztmb250LXdlaWdodDo3MDA7fTwvc3R5bGU+PC9kZWZzPjx0aXRsZT5sb2dvLTMtYmxhY2s8L3RpdGxlPjxwYXRoIGNsYXNzPSJjbHMtMSIgZD0iTTEyOCwyMEExMDguMTIsMTA4LjEyLDAsMCwxLDIzNiwxMjhoMjBBMTI4LDEyOCwwLDAsMCwwLDEyOEgyMEExMDguMTIsMTA4LjEyLDAsMCwxLDEyOCwyMFoiLz48cmVjdCBjbGFzcz0iY2xzLTIiIHg9IjEyMC4zMSIgeT0iODUuMzEiIHdpZHRoPSI4OC4wNyIgaGVpZ2h0PSI5LjY2IiB0cmFuc2Zvcm09InRyYW5zbGF0ZSgtMjEuOTEgMTExLjE4KSByb3RhdGUoLTM1LjE5KSIvPjxyZWN0IGNsYXNzPSJjbHMtMyIgeD0iMTE2IiB5PSIxMDQiIHdpZHRoPSIyNCIgaGVpZ2h0PSIyNCIgcng9IjEyIiByeT0iMTIiLz48dGV4dCBjbGFzcz0iY2xzLTQiIHRyYW5zZm9ybT0idHJhbnNsYXRlKDQwLjE5IDIzMS42NykiPktQSTwvdGV4dD48L3N2Zz4=" alt="KPI Manager">#}
+{#            </div>#}
+            <div style="clear: both;"></div>
+{#            <div class="small" style="display: flex; flex-direction: row; justify-content: center;">#}
+{#                <img src="/media/{{ data_profile.avatar }}" alt="avt" style="width: 40px;height: 40px;border-radius: 20px;display: block;">#}
+{#            </div>#}
+            <div class="kpi-title">
+                <div>BÁO CÁO THỐNG KÊ KPI THÁNG {{ month_request }}/{{ year_request }}</div>
+                <div>CỦA <span>{{ data_profile.full_name }}</span></div>
+            </div>
+            <div class="small" style="text-align: center">{{ data_department_profile.position }} · {{ data_department_profile.department }}</div>
+            <div class="small" style="text-align: center">Email: <b>{{ data_profile.user.email }}</b></div>
+            <div style="font-weight: bold; margin-bottom: 8px;">Thống Kê Chung:</div>
+{#            <ul class="list-tag-info">#}
+{#                <li>- KPI Được Giao: {{ data_tag_info.total_tag }} KPI.</li>#}
+{#                <li>- Hoàn Thành: {{ data_tag_info.count_finished }} KPI.</li>#}
+{#                <li>- Chưa Hoàn Thành: {{ data_tag_info.count_progress|add:data_tag_info.count_un_finished }} KPI.</li>#}
+{#                <li>- Tổng Số Giờ Làm Việc: {{ data_tag_info.total_time }} giờ.</li>#}
+{#            </ul>#}
+            <table class="u-full-width">
+                <thead>
+                <tr class="small">
+                    <th>KPI Được Giao</th>
+                    <th>Hoàn Thành</th>
+                    <th>Chưa Hoàn Thành</th>
+                    <th>Tổng Số Giờ Làm Việc</th>
+                </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td class="small"><b>{{ data_tag_info.total_tag }} KPI</b></td>
+                        <td class="small"><b>{{ data_tag_info.count_finished }} KPI</b></td>
+                        <td class="small"><b>{{ data_tag_info.count_progress|add:data_tag_info.count_un_finished }} KPI</b></td>
+                        <td class="small"><b>{{ data_tag_info.total_time }} giờ</b></td>
+                    </tr>
+                </tbody>
+            </table>
+            <div style="font-weight: bold; margin-bottom: 8px;">Thông Tin Chi Tiết KPI:</div>
+            <table class="u-full-width">
+                <thead>
+                <tr class="small">
+                    <th>STT</th>
+                    <th>KPI</th>
+                    <th>Mục Tiêu</th>
+                    <th>Đã Đạt</th>
+                    <th>Tiến Độ</th>
+                </tr>
+                </thead>
+                <tbody>
+                {% for item in col %}
+                <tr>
+                    {% with xxx=forloop.parentloop.counter0|mul:6 %}
+                        <td class="small">{{ forloop.counter|add:xxx }}</td>
+                        <td class="small">
+                            <div style="width:250px;word-break: break-word">
+                                <b>{{ item.tag_name }}</b>
+                            </div>
+                            <div>Ngày bắt đầu: {% firstof item.period_start|date:'d/m/Y' '' %}</div>
+                            <div>Ngày kết thúc: {% firstof item.period_end|date:'d/m/Y' '' %}</div>
+                            <div>Trạng thái: <b>{{ item.get_state }}</b></div>
+                        </td>
+                        <td class="small"><b>{{ item.quantity }}</b></td>
+                        <td class="small">{{ item.finished }}</td>
+                        <td class="small">{{ item.progress }}%</td>
+                    {% endwith %}
+
+                </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+        </section>
+    {% endfor %}
+</body>
+</html>

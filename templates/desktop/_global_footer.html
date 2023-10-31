@@ -1,0 +1,75 @@
+{% load static %}
+
+<div class="container mt-4">
+    <ul class="mobile-apps list-inline pb-2 mb-0">
+        <li class="list-inline-item"><a href="https://itunes.apple.com/us/app/truyenyy-com/id1358215910" target="_blank"><i class="iconfont icon-apple"></i></a></li>
+        <li class="list-inline-item"><a href="https://play.google.com/store/apps/details?id=com.truyenyy.apps.official2" target="_blank"><i class="iconfont icon-android"></i></a></li>
+    </ul>
+    <ul class="list-inline links">
+        <li class="list-inline-item"><a target="_blank" href="#">Giới Thiệu</a></li>
+        <li class="list-inline-item"><a target="_blank" href="#">Liên Hệ</a></li>
+        <li class="list-inline-item"><a target="_blank" href="#">Điều Khoản Dịch Vụ</a></li>
+        <li class="list-inline-item"><a target="_blank" href="#">Quy Định Riêng Tư</a></li>
+{#        <li class="list-inline-item"><a target="_blank" href="{% url 'pages:detail' slug='van-de-ban-quyen' %}">Vấn Đề Bản Quyền</a></li>#}
+{#        <li class="list-inline-item"><a target="_blank" href="https://truyenyy.com/sitemap.xml">Sitemap</a></li>#}
+    </ul>
+</div>
+
+<a href="#" class="back-top" style="display: none;"><i class="iconfont icon-top"></i></a>
+
+<hr>
+<div class="container">
+    <div class="row pt-md">
+        <div class="col-lg-4 mb-5 mb-lg-0">
+            <a href="/">
+                <img src="{% static 'img/logo-black.svg' %}" alt="TruyenYY logo"
+                     style="height: 40px;">
+            </a>
+            <div class="pb-1 ml-auto mr-auto small mt-2">
+                TruyenYY (TruyệnYY hay gọi tắt "YY") là một <strong>nền tảng nội dung số</strong> trên internet,
+                nơi thành viên có thể tự do xuất bản những
+                nội dung tiếng Việt như: Tiểu thuyết, light novel, truyện ngắn hoặc thơ văn khác. Với những chức
+                năng được cải tiến liên tục, TruyenYY sẽ
+                mang lại cho Tác giả, Dịch giả và Người đọc những trải nghiệm tuyệt vời nhất.
+                {% if not user.is_authenticated %}Đừng ngại đăng ký tài khoản tại TruyenYY, chỉ mất 30s và
+                    hoàn toàn miễn phí.{% endif %}</div>
+        </div>
+
+    </div>
+    <div class="row align-items-center justify-content-md-between py-4 mt-2 delimiter-top">
+        <div class="col-md-6">
+            <div class="copyright small font-weight-bold text-center text-md-left">
+                &copy; 2012-{% now "Y" %} TruyenYY.com. All Rights Reserved.
+            </div>
+        </div>
+        <div class="col-md-6">
+            <ul class="nav justify-content-center justify-content-md-end mt-3 mt-md-0">
+                <li class="nav-item">
+                    <a class="nav-link" href="https://www.facebook.com/TruyenYY/" target="_blank" data-toggle="tooltip" title="Facebook Fanpage">
+                        <img src="{% static 'img/logo-black.svg' %}" alt="Facebook" style="width: 24px; height: 24px;">
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="https://www.facebook.com/groups/YYHoi/" target="_blank" data-toggle="tooltip" title="YY Hội">
+                        <img src="{% static 'img/logo-black.svg' %}" alt="YY Hội" style="width: 24px; height: 24px;">
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="https://twitter.com/TruyenYY/" target="_blank" data-toggle="tooltip" title="TruyenYY tại Twitter">
+                        <img src="{% static 'img/logo-black.svg' %}" alt="Twitter" style="width: 24px; height: 24px;">
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="http://www.youtube.com/TruyenYYOfficial" target="_blank" data-toggle="tooltip" title="Kênh Youtube Chính Thức TruyenYY">
+                        <img src="{% static 'img/logo-black.svg' %}" alt="Youtube" style="width: 24px; height: 24px;">
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="http://www.soundcloud.com/TruyenYY" target="_blank" data-toggle="tooltip" title="Kênh SoundClound Chính Thức TruyenYY">
+                        <img src="{% static 'img/logo-black.svg' %}" alt="SoundCloud" style="width: 24px; height: 24px;">
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>

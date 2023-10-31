@@ -1,0 +1,36 @@
+{% extends 'desktop/base.html' %}
+{% load static crispy_forms_tags %}
+
+{% block title %}Thoát Tài Khoản - KPI Manager{% endblock %}
+
+{% block top_nav %}{% endblock %}
+{% block main_nav %}{% endblock %}
+{% block header %}{% endblock %}
+{% block footer %}{% endblock %}
+
+{% block content %}
+<div class="container py-3">
+    <div class="row">
+        <div class="col-md-12">
+            <h2 class="text-center mb-4">
+                <a href="/"><img src="{% static '' %}" alt="TruyenYY" width="120" height="120"></a>
+            </h2>
+            <div class="row">
+                <div class="col-md-6 col-sm-8 mx-auto">
+                    <div class="card border-primary">
+                        <div class="card-header">
+                            <h5 class="mb-0 my-2">Thoát Tài Khoản Thành Công</h5>
+                        </div>
+                        <div class="card-body">
+                            <a href="{% url 'registration:login' %}" class="btn btn-secondary btn-block">Đăng Nhập Lại</a>
+                            <a href="/" class="btn btn-secondary btn-block">Trở Lại Trang Chủ</a>
+                        </div>
+                    </div>
+
+                    <footer class="text-center my-2"><small class="text-muted">&copy; 2012-{% now "Y" %} TruyenYY.</small></footer>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

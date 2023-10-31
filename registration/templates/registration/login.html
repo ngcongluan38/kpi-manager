@@ -1,0 +1,37 @@
+{% extends 'registration/registration_base.html' %}
+{% load static crispy_forms_tags socialaccount %}
+
+{% block title %}Đăng Nhập - KPI Manager{% endblock %}
+
+{% block content %}
+<div class="container py-3">
+    <div class="row">
+        <div class="col-md-12">
+            <h4 class="text-center">
+                <a href="/"><img src="{% static 'img/logo-black.svg' %}" alt="KPI Manager" width="100" height="100"></a>
+            </h4>
+            <div class="row">
+                <div class="col-md-6 col-sm-8 mx-auto">
+                    <div class="card border-muted">
+                        <div class="card-header">
+                            <h5 class="mb-0 my-2">Đăng Nhập Tài Khoản</h5>
+                        </div>
+                        <div class="card-body">
+                            <form class="form" role="form" autocomplete="off" action="." method="post">
+                                {% crispy form %}
+
+                                <input type="hidden" name="next" value="{{ next }}">
+
+                                <button type="submit" class="btn btn-primary btn-lg btn-block">Tiến Hành Đăng Nhập</button>
+                                <a href="/" class="btn btn-outline-secondary btn-lg btn-block">Bỏ Qua</a>
+                            </form>
+                        </div>
+                    </div>
+
+                    {% include 'registration/_footer.html' %}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
